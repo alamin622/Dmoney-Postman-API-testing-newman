@@ -16,4 +16,4 @@
 ### npm i newman-reporter-htmlextra
 ### npm test
 # Report
-### The test results after running the above command will be available [here](https://drive.google.com/file/d/1ZY47hBFVieBextZ3NRCoYyPM7VafeEpT/view?usp=sharing)
+### The test results after running the above command will be available [here](https://alamin622.github.io/report.html)
