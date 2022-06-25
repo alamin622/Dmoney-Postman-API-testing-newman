@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "da5ef355-9ab0-44c2-ae9c-699dad1c5963",
-		"name": "Dmoney Users B4",
+		"name": "API Testing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21542725"
 	},
@@ -79,7 +79,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"salman@grr\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"alaminchoudhury@gmail.com\",\r\n    \"password\":\"Alamin@sdet\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"salman@grr.la\",\r\n    \"password\":\"1ff234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"alaminchoudhury@gmail.com\",\r\n    \"password\":\"Alamin@sdet\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
