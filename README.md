@@ -52,6 +52,12 @@
 - Failed Tests
 ![newman report (4)](https://user-images.githubusercontent.com/56792623/175763302-610e6e73-14b3-441c-9c81-8b3466c40240.png)
 
--Skipped Tests
+- Skipped Tests
 ![newman report (1)](https://user-images.githubusercontent.com/56792623/175763306-a1f209a2-b01b-4bbc-a8a4-31bc180cedaa.png)
+
+- Collection Runner
+![CollectionRunner](https://user-images.githubusercontent.com/56792623/175763906-bb1ec8e9-65f6-46bc-ba79-ef6641197aa4.png)
+
+- Newman Terminal View
+![newman3](https://user-images.githubusercontent.com/56792623/175763926-4d36aa30-0d98-4456-8b80-7d3e7b9ce68a.png)
 
