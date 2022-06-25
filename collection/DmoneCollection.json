@@ -14,6 +14,9 @@
 					"script": {
 						"exec": [
 							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
 							"var token = jsonData.token;\r",
 							"pm.collectionVariables.set(\"token\" , token)\r",
 							"console.log(token)\r",
@@ -31,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"salman@grr.la\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"alaminchoudhury@gmail.com\",\r\n    \"password\":\"Alamin@sdet\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,9 +159,9 @@
 							"    pm.expect(jsonData.message).to.contains(\"User list\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"User 1 id is 1\", function () {\r",
+							"pm.test(\"User 1 id is 3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.users[0].id).eql(1);\r",
+							"    pm.expect(jsonData.users[0].id).eql(3);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -296,8 +299,11 @@
 							"\r",
 							"var jsonData=pm.response.json();\r",
 							"var id=jsonData.user.id;\r",
+							"var phone_number=jsonData.user.phone_number;\r",
 							"pm.collectionVariables.set(\"id\",id);\r",
-							"pm.environment.set(\"id\",id);"
+							"pm.collectionVariables.set(\"phone_number\",phone_number);\r",
+							"pm.environment.set(\"id\",id);\r",
+							"pm.environment.set(\"phone_number\",phone_number);"
 						],
 						"type": "text/javascript"
 					}
@@ -430,10 +436,7 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Response showing id \", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.user.id).to.eql(1001);\r",
-							"});\r",
+							"\r",
 							"\r",
 							""
 						],
@@ -468,7 +471,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?id=1001",
+					"raw": "http://dmoney.professionaltrainingbd.com/user/search?id={{id}}",
 					"protocol": "http",
 					"host": [
 						"dmoney",
@@ -482,64 +485,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1001"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Search User  by email",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test(\"Response showing email \", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.user.email).to.contains(\"testmail 44788@gmail.com\");\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{token}}",
-						"type": "text"
-					},
-					{
-						"key": "X-AUTH-SECRET-KEY",
-						"value": "{{pwKey}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?email=testmail 44788@gmail.com",
-					"protocol": "http",
-					"host": [
-						"dmoney",
-						"professionaltrainingbd",
-						"com"
-					],
-					"path": [
-						"user",
-						"search"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "testmail 44788@gmail.com"
+							"value": "{{id}}"
 						}
 					]
 				}
@@ -556,10 +502,7 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Response showing Phone number \", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.user.phone_number).to.contains(\"01742667781\");\r",
-							"});\r",
+							"\r",
 							"\r",
 							""
 						],
@@ -582,7 +525,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?phone_number=01742667781",
+					"raw": "http://dmoney.professionaltrainingbd.com/user/search?phone_number={{phoneNumber}}",
 					"protocol": "http",
 					"host": [
 						"dmoney",
@@ -596,7 +539,7 @@
 					"query": [
 						{
 							"key": "phone_number",
-							"value": "01742667781"
+							"value": "{{phoneNumber}}"
 						},
 						{
 							"key": "X-AUTH-SECRET-KEY",
@@ -609,18 +552,18 @@
 			"response": []
 		},
 		{
-			"name": "Search User wrong id",
+			"name": "Search User if user does not inputs token",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
 							"});\r",
-							"pm.test(\"User should not found \", function () {\r",
+							"pm.test(\"User Can't user data with wrong pwKey\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.user).to.eql(null);\r",
+							"    pm.expect(jsonData.error.message).to.contains(\"Secret auth key validation failure!\");\r",
 							"});\r",
 							"\r",
 							""
@@ -639,12 +582,12 @@
 					},
 					{
 						"key": "X-AUTH-SECRET-KEY",
-						"value": "{{pwKey}}",
+						"value": "asvf151",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?id=0000",
+					"raw": "http://dmoney.professionaltrainingbd.com/user/search?id={{id}}",
 					"protocol": "http",
 					"host": [
 						"dmoney",
@@ -658,64 +601,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "0000"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Search User by wrong email",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test(\"User should not found \", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.user).to.eql(null);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{token}}",
-						"type": "text"
-					},
-					{
-						"key": "X-AUTH-SECRET-KEY",
-						"value": "{{pwKey}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?email=system@est.com",
-					"protocol": "http",
-					"host": [
-						"dmoney",
-						"professionaltrainingbd",
-						"com"
-					],
-					"path": [
-						"user",
-						"search"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "system@est.com"
+							"value": "{{id}}"
 						}
 					]
 				}
@@ -758,7 +644,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://dmoney.professionaltrainingbd.com/user/search?phone_number=0171203432",
+					"raw": "http://dmoney.professionaltrainingbd.com/user/search?phone_number=0175111111",
 					"protocol": "http",
 					"host": [
 						"dmoney",
@@ -772,7 +658,7 @@
 					"query": [
 						{
 							"key": "phone_number",
-							"value": "0171203432"
+							"value": "0175111111"
 						}
 					]
 				}
@@ -808,7 +694,7 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"User update successfully\", function () {\r",
+							"pm.test(\"User update has been successfull\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.message).to.contains(\"User updated successfully\");\r",
 							"});"
@@ -1193,15 +1079,6 @@
 			"name": "Search the delete user",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
 					"listen": "test",
 					"script": {
 						"exec": [
@@ -1212,6 +1089,15 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.user).to.eql(null);\r",
 							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -1292,15 +1178,15 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkBncnIubGEiLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE2NTU5MDA0NjcsImV4cCI6MTY1NTkwMjI2N30.D7kmLJw4rHL722Gjmg-L1aQeRVgAqm8e_e9QkphEQ9c"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkBncnIubGEiLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE2NTU5NjI5MzcsImV4cCI6MTY1NTk2NDczN30.ypcuwJ8FU3SMo4GVufcz-gCxZSuhzHjn_KRZHvFqpj4"
 		},
 		{
 			"key": "phoneNumber",
-			"value": "0173030542"
+			"value": "0176840202"
 		},
 		{
 			"key": "nid",
-			"value": "1233030542"
+			"value": "1236840202"
 		},
 		{
 			"key": "pwKey",
@@ -1309,6 +1195,10 @@
 		},
 		{
 			"key": "id",
+			"value": 2349
+		},
+		{
+			"key": "phone_number",
 			"value": ""
 		}
 	]
