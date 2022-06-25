@@ -17,7 +17,7 @@
 
 - #### This Project Demonstrates API Testing . API tested in this project includes different HTTP request create , update,delete, search, get , post, put, patch . test can be executed using postman collection runner and newman
 
-### **How to run this project**
+## **How to run this project**
 
 - #### Clone this project
 
